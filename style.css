@@ -14,7 +14,6 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: brown;
     border: solid;
     border-width: 5px;
     border-color: black;

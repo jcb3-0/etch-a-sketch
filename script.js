@@ -2,7 +2,7 @@ const container = document.querySelector('#container');
 // let gridSquare = document.createElement('div')
 // let gridRow = document.createElement('div');
 const rows = document.querySelectorAll('.row');
-const squares = Array.from(document.querySelectorAll('.square'));
+// const squares = Array.from(document.querySelectorAll('.square'));
 let gridDimensions = prompt("How many squares per side (2 - 100)?");
 
 const createGrid = () => {
@@ -19,12 +19,11 @@ const createGrid = () => {
 }
 createGrid();
 
-// function draw(e) {
-//     e.style.backgroundColor = 'black';
-// }
+function drawBlack(square) {
+    square.style.backgroundColor = 'black';
+};
 
-    document.querySelectorAll('.square').forEach(item => 
-        item.addEventListener('mouseover',() => item.style.backgroundColor = 'black'));
-
-
+// draw black squares with mouse
+document.querySelectorAll('.square').forEach(square => 
+    square.addEventListener('mouseover', () => drawBlack(square)));
 
