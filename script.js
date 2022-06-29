@@ -3,8 +3,12 @@ const container = document.querySelector('#container');
 let gridRow = document.createElement('div');
 // const rows = document.querySelectorAll('.row');
 // const squares = document.querySelectorAll('.square');
-let gridDimensions = 0;
-const gridButton = document.querySelector('#createGrid')
+let gridDimensions = document.querySelector('#gridDimensions').value;
+const resetButton = document.querySelector('#reset');
+const slider = document.querySelector('input');
+const display = document.querySelector('#display');
+
+display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
 
 const createGrid = () => {
     for (let i = 0; i < gridDimensions; i++) {
@@ -28,7 +32,7 @@ const removeGrid = () => {
     });
 }
 
-gridButton.addEventListener('click', () => {
+resetButton.addEventListener('click', () => {
     gridDimensions = parseInt(document.querySelector('#gridDimensions').value);
     removeGrid();
     createGrid();
@@ -37,13 +41,26 @@ gridButton.addEventListener('click', () => {
     return;
 });
 
-//createGrid();
+createGrid();
+slider.addEventListener ('input', function() {
+    gridDimensions = parseInt(document.querySelector('#gridDimensions').value);
+    display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
+    removeGrid();
+    createGrid();
+    document.querySelectorAll('.square').forEach(square => 
+        square.addEventListener('mouseover', () => drawBlack(square)));
+    //return;
+});
 
+// slider.oninput = function() {
+//     display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
+// };
+
+
+// draw black squares with mouse
 function drawBlack(square) {
     square.style.backgroundColor = 'black';
 };
-
-// draw black squares with mouse
 document.querySelectorAll('.square').forEach(square => 
     square.addEventListener('mouseover', () => drawBlack(square)));
 
