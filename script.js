@@ -38,7 +38,7 @@ resetButton.addEventListener('click', () => {
     createGrid();
     document.querySelectorAll('.square').forEach(square => 
         square.addEventListener('mouseover', () => drawBlack(square)));
-    return;
+    //return;
 });
 
 createGrid();
@@ -58,11 +58,20 @@ slider.addEventListener ('input', function() {
 
 
 // draw black squares with mouse
+let l = 100;
 function drawBlack(square) {
-    square.style.backgroundColor = 'black';
+        l = l-10;
+        square.style.backgroundColor = `hsl(0, 0%, ${l}%)`;
 };
 document.querySelectorAll('.square').forEach(square => 
     square.addEventListener('mouseover', () => drawBlack(square)));
 
+//count passes in a square
+// let passesOverSquare = 0;
+// function countPassesOverSquare(e) {
+//     passesOverSquare++;
+//     console.log(passesOverSquare);
+// // }
 
-
+// document.querySelectorAll('.square').forEach(square => 
+//     square.addEventListener('mouseover', countPassesOverSquare(square)));
