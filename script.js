@@ -5,6 +5,7 @@ const resetButton = document.querySelector('#reset');
 const slider = document.querySelector('input');
 const display = document.querySelector('#display');
 let black = document.querySelector('#black');
+let eraser = document.querySelector('#eraser');
 
 function createGrid() {
     for (let i = 0; i < gridDimensions; i++) {
@@ -28,21 +29,22 @@ function removeGrid() {
         square.remove();
     });
 }
-function toggle(black) {
-    console.log(black);
-    if (black.value == 'on') {
-        black.value = 'off';
-        black.style.backgroundColor = '';
+function toggle(button) {
+    if (button.value == 'on') {
+        button.value = 'off';
+        button.style.backgroundColor = '';
     } else {
-        black.style.backgroundColor = 'yellow';
-        black.value = 'on';
+        button.style.backgroundColor = 'yellow';
+        button.value = 'on';
     }
 };
 
 function draw() {
     document.querySelectorAll('.square').forEach(square => 
         square.addEventListener('mouseover', () => {
-        if(black.value == 'on') {
+        if (eraser.value == 'on') {
+            square.style.backgroundColor = 'rgb(255, 255, 255)';
+        } else if (black.value == 'on') {
             square.style.backgroundColor = `rgb(0, 0, 0)`;
         } else shadeGray(square);
     })
@@ -94,3 +96,4 @@ resetButton.addEventListener('click', () => {
 });
 
 black.addEventListener('click', () => toggle(black));
+eraser.addEventListener('click', () => toggle(eraser));
