@@ -6,7 +6,18 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    /* flex-direction: column; */
+}
+
+.mainContent {
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.right {
+justify-content: center;
 }
 
 #container {
@@ -34,6 +45,6 @@ body {
     border-color: black; */
 }
 
-/* .square:hover {
-    background-color: black;
-} */
+#right {
+    margin: 50px;
+}

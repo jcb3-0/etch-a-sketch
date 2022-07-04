@@ -4,7 +4,9 @@ let gridDimensions = document.querySelector('#gridDimensions').value;
 const resetButton = document.querySelector('#reset');
 const slider = document.querySelector('input');
 const display = document.querySelector('#display');
-const createGrid = () => {
+let black = document.querySelector('#black');
+
+function createGrid() {
     for (let i = 0; i < gridDimensions; i++) {
         let gridRow = document.createElement('div');
         container.appendChild(gridRow);
@@ -16,8 +18,9 @@ const createGrid = () => {
             gridSquare.style.backgroundColor = 'rgb(255, 255, 255)';
         }
     }
+    draw();
 }
-const removeGrid = () => {
+function removeGrid() {
     document.querySelectorAll('.row').forEach(row => {
         row.remove();
     });
@@ -25,9 +28,31 @@ const removeGrid = () => {
         square.remove();
     });
 }
+function toggle(black) {
+    console.log(black);
+    if (black.value == 'on') {
+        black.value = 'off';
+        black.style.backgroundColor = '';
+    } else {
+        black.style.backgroundColor = 'yellow';
+        black.value = 'on';
+    }
+};
+
+function draw() {
+    document.querySelectorAll('.square').forEach(square => 
+        square.addEventListener('mouseover', () => {
+        if(black.value == 'on') {
+            square.style.backgroundColor = `rgb(0, 0, 0)`;
+        } else shadeGray(square);
+    })
+    )
+};
+
 //shades darker until black
-function drawBlack(square) {
+function shadeGray(square) {
     let c = square.style.backgroundColor;
+    console.log(c);
     if (c.length === 18) {
         let r = parseInt(c.substr(4,3));
         let b = parseInt(c.substr(9,3));
@@ -46,8 +71,8 @@ createGrid();
 display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
 
 //draws on mouseover
-document.querySelectorAll('.square').forEach(square => 
-    square.addEventListener('mouseover', () => drawBlack(square)));
+// document.querySelectorAll('.square').forEach(square => 
+//     square.addEventListener('mouseover', () => shadeGray(square)));
 
 //changes grid dimensions
 slider.addEventListener('input', function () {
@@ -55,8 +80,8 @@ slider.addEventListener('input', function () {
     display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
     removeGrid();
     createGrid();
-    document.querySelectorAll('.square').forEach(square =>
-        square.addEventListener('mouseover', () => drawBlack(square)));
+    // document.querySelectorAll('.square').forEach(square =>
+    //     square.addEventListener('mouseover', () => shadeGray(square)));
 });
 
 //resets drawing
@@ -64,6 +89,8 @@ resetButton.addEventListener('click', () => {
     gridDimensions = parseInt(document.querySelector('#gridDimensions').value);
     removeGrid();
     createGrid();
-    document.querySelectorAll('.square').forEach(square => 
-        square.addEventListener('mouseover', () => drawBlack(square)));
+    // document.querySelectorAll('.square').forEach(square => 
+    //     square.addEventListener('mouseover', () => shadeGray(square)));
 });
+
+black.addEventListener('click', () => toggle(black));
