@@ -20,7 +20,7 @@ function createGrid() {
         }
     }
     draw();
-}
+};
 function removeGrid() {
     document.querySelectorAll('.row').forEach(row => {
         row.remove();
@@ -28,7 +28,7 @@ function removeGrid() {
     document.querySelectorAll('square').forEach(square => {
         square.remove();
     });
-}
+};
 function toggle(button) {
     if (button.value == 'on') {
         button.value = 'off';
@@ -38,7 +38,6 @@ function toggle(button) {
         button.value = 'on';
     }
 };
-
 function draw() {
     document.querySelectorAll('.square').forEach(square => 
         square.addEventListener('mouseover', () => {
@@ -50,8 +49,6 @@ function draw() {
     })
     )
 };
-
-//shades darker until black
 function shadeGray(square) {
     let c = square.style.backgroundColor;
     console.log(c);
@@ -69,31 +66,19 @@ function shadeGray(square) {
 };
 
 createGrid();
-
 display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
 
-//draws on mouseover
-// document.querySelectorAll('.square').forEach(square => 
-//     square.addEventListener('mouseover', () => shadeGray(square)));
-
-//changes grid dimensions
-slider.addEventListener('input', function () {
-    gridDimensions = parseInt(document.querySelector('#gridDimensions').value);
+//Event Listeners
+slider.addEventListener('input', () => {
+    gridDimensions = document.querySelector('#gridDimensions').value;
     display.innerText = 'Dimensions: ' + gridDimensions + 'x' + gridDimensions;
     removeGrid();
     createGrid();
-    // document.querySelectorAll('.square').forEach(square =>
-    //     square.addEventListener('mouseover', () => shadeGray(square)));
 });
-
-//resets drawing
 resetButton.addEventListener('click', () => {
-    gridDimensions = parseInt(document.querySelector('#gridDimensions').value);
+    gridDimensions = document.querySelector('#gridDimensions').value;
     removeGrid();
     createGrid();
-    // document.querySelectorAll('.square').forEach(square => 
-    //     square.addEventListener('mouseover', () => shadeGray(square)));
 });
-
 black.addEventListener('click', () => toggle(black));
 eraser.addEventListener('click', () => toggle(eraser));
